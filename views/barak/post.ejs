@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <h1 class="text-center">New Post</h1>
+    <div class="col-6 offset-3">
+        <form action="/barak/post" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label class="form-label" for="title">Post Title</label>
+                <input class="form-control" type="text" name="post[title]" id="title" required>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="image">Image </label>
+                <input class="form-control" type="file" name="post[image]" id="image" >
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="description">Description</label>
+                <textarea class="form-control" type="text" name="post[description]" required id="description"></textarea>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="expiry">Post Expiry</label>
+                <input class="form-control" type="date" name="post[expiry]" id="expiry" >
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <button class="btn btn-success">Post</button>
+            </div>           
+        </form>
+    </div>
+</div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.validated-form')
+
+  // Loop over them and prevent submission
+  Array.from(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+</script>
+
+<!-- <form action="/barak/post" method="POST" enctype="multipart/form-data" >
+    <label for="post_title">Post Title</label>
+    <input type="text" name="post[title]" id="post_title">
+    <label for="post_image">Post Image</label>
+    <input type="file" name="post[image]" id="post_image">
+    <label for="post_des">Post Description</label>
+    <textarea name="post[description]" id="post_des" cols="30" rows="10"></textarea>
+    <label for="post_expiry">Post Expiry</label>
+    <input type="date" name="post[expiry]" id="">
+    <button>Submit</button>
+</form> -->

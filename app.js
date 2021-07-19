@@ -1,10 +1,27 @@
+if(process.env.NODE_ENV!== "production"){
+    require('dotenv').config()
+}
+
 const express = require('express');
 const mongoose = require('mongoose');
 const hmc_member = require('./models/hmc_schema');
 const post = require('./models/post_schema');
 const app = express();
 const path = require('path');
+const methodOverride = require('method-override');
 const ejs_mate = require('ejs-mate') 
+const multer  = require('multer');
+const {storage} = require('./cloudinary/index');
+const upload = multer({ storage });
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./models/user_schema');
+const ExpressError = require('./utils/ExpressError');
+const {validate_post,isLoggedIn} = require('./middleware');
+const catchAsync = require('./utils/catchAsync');
+const barak_routes = require('./routes/barak');
 
 //mongoose connection
 mongoose.connect('mongodb://localhost:27017/barak',{
@@ -20,46 +37,61 @@ db.once("open",()=>{
     console.log('Database Connected')
 });
 
+
+
 app.use(express.urlencoded({extended: true}));
 app.use('/public', express.static(path.join(__dirname, '/public')));
+app.use('/node_modules/lightbox2', express.static(path.join(__dirname, '/node_modules/lightbox2')));
+app.use(methodOverride('_method'));
+
+
 app.engine('ejs',ejs_mate);
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'/views'));
 
 
-//main page
-app.get('/barak',(req,res)=>{
-    res.render('barak/index');
+//session & flash
+const sessionConfig = {
+    secret: 'thisshouldbeabettersecret!',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+}
+
+
+app.use(session(sessionConfig)); 
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+    console.log(req.session)
+    res.locals.currentUser = req.user;
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
 })
 
-//hmc page
-app.get('/barak/hmc',async (req,res)=>{
-    const members = await hmc_member.find({});
-    res.render('barak/hmc',{members});
+app.use('/barak',barak_routes);
+
+app.all('*',(req,res,next)=>{
+    next(new ExpressError('Page Not Found',404));
 })
 
-
-
-//post
-app.get('/barak/post',(req,res)=>{
-    res.render('barak/post')
-})
-app.post('/barak/post',async (req,res)=>{
-    const {title,image,description,expiry} = req.body.post;
-    const new_feed = new post({
-        title : title,
-        image : image,
-        description : description,
-        expiry : expiry
-    })
-    await new_feed.save();
-    res.redirect('/barak/feeds');
-})
-
-//feed page
-app.get('/barak/feeds',async (req,res)=>{
-    const posts = await post.find({});
-    res.render('barak/feeds',{posts});
+app.use((err,req,res,next)=>{
+    const {statusCode=500 }=err;
+    if(!err.message) err.message = 'Oh No, Something Went Wrong'
+    res.status(statusCode).render('error',{err});
+    res.send("oh boy something went wrong")
 })
 
 app.listen(3000,()=>{

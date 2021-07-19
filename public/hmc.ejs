@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container">
+    <div class="row my-5">
+        <% for (let member of members) { if(member.name != 'Aryan Meshram' && member.name != 'Nitesh'){%>        
+        <div class="col-3 mb-5">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="/mountains.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title"><%=member.post%></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><strong><%=member.name%></strong></li>
+                  <li class="list-group-item">Ph: <%=member.ph%></li>
+                  <li class="list-group-item">Email: <%=member.email%></li>
+                </ul>
+                <div class="card-body">
+                    <button class="btn btn-primary"><a href="#" class="card-link">More Info</a></button>
+                </div>
+              </div>
+        </div>
+        <%}else{%>
+            <div class="col-5 offset-1 mb-5">
+                <div class="card" style="width: 18rem; height: 20rem;">
+                    <img class="card-img-top" src="..." alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title"><%=member.post%></h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item"><strong><%=member.name%></strong></li>
+                      <li class="list-group-item"><%=member.ph%></li>
+                      <li class="list-group-item"><%=member.email%></li>
+                    </ul>
+                    <div class="card-body">
+                        <button class="btn btn-primary"><a href="#" class="card-link">More Info</a></button>
+                    </div>
+                  </div>
+            </div>
+            <%}%>
+        <%}%>
+    </div>
+</div>

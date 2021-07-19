@@ -1,0 +1,29 @@
+.navbar{
+
+    background-color: black;
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding-top: 0;
+    padding-bottom: 0;
+    
+    
+}
+#navbarNav{
+    margin-top: 0rem;
+
+}
+.brand{
+    color: white;
+    font-size: 2.5rem;
+    padding-left: 4px;
+}
+
+.nav-link{
+    color: white;
+}
+
+img{
+   margin-bottom: 1.5rem;
+   width: 3rem;
+   height: 3rem;
+}

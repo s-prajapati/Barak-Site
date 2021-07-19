@@ -1,0 +1,36 @@
+.example_a {
+	color: #fff !important;
+	text-transform: uppercase;
+	text-decoration: none;
+	background: #495374;
+	padding: 20px;
+	border-radius: 5px;
+	display: inline-block;
+	border: none;
+	transition: all 0.4s ease 0s;
+}
+.example_a:hover {
+	background:#353c56;
+	letter-spacing: 1px;
+	-webkit-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	-moz-box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
+	box-shadow: 5px 40px -10px rgba(0,0,0,0.57);
+	transition: all 0.4s ease 0s;
+}
+.toIncreaseSize{
+    transition: all 0.3s ease 0s;
+}
+.toIncreaseSize:hover{
+    font-size: 150%;
+}
+.iconcolor{
+    transition: all 0.3s ease 0s;
+    }
+.toIncreaseSize:hover .iconcolor{
+    fill: #fff;
+}
+.myspan{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+}

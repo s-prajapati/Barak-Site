@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/public/stylesheets/hmc.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <title>HMC</title>
+</head>
+<body>
+  <section>
+      <div class="container">
+        <%for(let member of members){if(member.name =='Aryan Meshram' || member.name == 'Nitesh'){%>
+        <div class="card">
+              <div class="content">
+                  <div class="imgBx">
+                      <img src="../../public/hmc_images/<%=member.img%>" alt="" srcset="">
+                      
+                  </div>
+                  <div class="contentBx">
+                      <h3><%=member.post%><br><span><%=member.name%></span></h3>
+                  </div>
+              </div>
+          
+          <ul class="sci">
+              <li style="--i:1">
+                  <a href=""><i class="fas fa-phone"></i></a>
+              </li>
+              <li style="--i:2">
+                <a href=""><i class="far fa-envelope"></i></a>
+              </li>
+              <li style="--i:3">
+                  <a href=""><i class="fab fa-facebook-f"></i></a>
+              </li>
+              <li style="--i:4">
+                  <a href=""><i class="fab fa-instagram"></i></a>
+              </li>
+              <li style="--i:5">
+                <a href=""><i class="fab fa-linkedin-in"></i></a>
+            </li>
+          </ul>
+      </div>
+      <%}}%>
+    </div>
+    <div class="container">
+      <%for(let member of members){if(member.name!='Aryan Meshram' && member.name != 'Nitesh'){%>
+        <div class="card">
+              <div class="content">
+                  <div class="imgBx">
+                      <img src="../../public/hmc_images/<%=member.img%>" alt="" srcset="">
+                      
+                  </div>
+                  <div class="contentBx">
+                      <h3><%=member.post%><br><span><%=member.name%></span></h3>
+                  </div>
+              </div>
+          
+          <ul class="sci">
+              <li style="--i:1">
+                  <a href=""><i class="fas fa-phone"></i></a>
+              </li>
+              <li style="--i:2">
+                <a href=""><i class="far fa-envelope"></i></a>
+              </li>
+              <li style="--i:3">
+                  <a href=""><i class="fab fa-facebook-f"></i></a>
+              </li>
+              <li style="--i:4">
+                  <a href=""><i class="fab fa-instagram"></i></a>
+              </li>
+              <li style="--i:5">
+                <a href=""><i class="fab fa-linkedin-in"></i></a>
+            </li>
+          </ul>
+      </div>
+      <%}}%>
+    </div>
+  </section>
+  <script src="/public/javascript/vanilla-tilt.js"></script>
+        <script type="text/javascript">
+            VanillaTilt.init(document.querySelectorAll(".card"), {
+                max: 25,
+                speed: 400
+            });
+            
+            //It also supports NodeList
+            VanillaTilt.init(document.querySelectorAll(".your-element"));
+        </script>
+</body>
+</html>
+
+
+
+
+<!-- <div class="container">
+    <div class="row my-5">
+        <% for (let member of members) { if(member.name != 'Aryan Meshram' && member.name != 'Nitesh'){%>        
+        <div class="col-lg-3 col-sm-6 col-12 mb-5 d-flex ">
+            <div class="card" style="width: 16rem;">
+                <img class="card-img-top img-fluid" src="../../public/hmc_images/<%=member.img%>" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title text-center"><%=member.post%></h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item text-center"><strong><%=member.name%></strong></li>
+                  <li class="list-group-item">Ph: <%=member.ph%></li>
+                  <li class="list-group-item text-nowrap">Email: <%=member.email%></li>
+                </ul>
+              </div>
+        </div>
+        <%}else{%>
+            <div class="col-lg-5 col-sm-6 col-12 offset-1 mb-5 d-flex ">
+                <div class="card" style="width: 18rem; ">
+                    <img class="card-img-top img-fluid" src="../../public/hmc_images/<%=member.img%>" alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title text-center"><%=member.post%></h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item text-center"><strong><%=member.name%></strong></li>
+                      <li class="list-group-item"><%=member.ph%></li>
+                      <li class="list-group-item"><%=member.email%></li>
+                    </ul>
+                  </div>
+            </div>
+            <%}%>
+        <%}%>
+    </div>
+</div> -->
